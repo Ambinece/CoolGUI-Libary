@@ -1,0 +1,113 @@
+-- CoolGUI Library
+local CoolGUI = {}
+
+-- Predefined themes
+CoolGUI.Themes = {
+    RedAndBlack = {
+        Background = Color3.fromRGB(20, 20, 20), -- Dark background
+        Foreground = Color3.fromRGB(40, 40, 40), -- Slightly lighter for elements
+        Text = Color3.fromRGB(255, 255, 255),   -- White text
+        Accent = Color3.fromRGB(255, 50, 50),   -- Bright red for accents
+    },
+}
+
+-- Current theme
+CoolGUI.CurrentTheme = CoolGUI.Themes.RedAndBlack -- Default to Red and Black theme
+
+-- Apply theme to a UI element
+function CoolGUI:ApplyTheme(element, elementType)
+    if elementType == "Frame" then
+        element.BackgroundColor3 = CoolGUI.CurrentTheme.Background
+    elseif elementType == "Button" then
+        element.BackgroundColor3 = CoolGUI.CurrentTheme.Foreground
+        element.TextColor3 = CoolGUI.CurrentTheme.Text
+    elseif elementType == "TextLabel" then
+        element.TextColor3 = CoolGUI.CurrentTheme.Text
+    elseif elementType == "Accent" then
+        element.BackgroundColor3 = CoolGUI.CurrentTheme.Accent
+    end
+end
+
+-- Change theme
+function CoolGUI:SetTheme(themeName)
+    if CoolGUI.Themes[themeName] then
+        CoolGUI.CurrentTheme = CoolGUI.Themes[themeName]
+        CoolGUI:UpdateTheme()
+    else
+        warn("Theme not found:", themeName)
+    end
+end
+
+-- Update all UI elements with the current theme
+function CoolGUI:UpdateTheme()
+    for _, element in pairs(CoolGUI.Elements) do
+        CoolGUI:ApplyTheme(element.Instance, element.Type)
+    end
+end
+
+-- Track all UI elements
+CoolGUI.Elements = {}
+
+-- Create a new window
+function CoolGUI:CreateWindow(options)
+    local window = {}
+
+    -- ScreenGui for the UI
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+    -- Main window frame
+    local mainFrame = Instance.new("Frame")
+    mainFrame.Size = UDim2.new(0, 400, 0, 300)
+    mainFrame.Position = UDim2.new(0.5, -200, 0.5, -150)
+    mainFrame.BackgroundColor3 = CoolGUI.CurrentTheme.Background
+    mainFrame.BorderSizePixel = 0
+    mainFrame.Parent = screenGui
+
+    -- Track the element
+    table.insert(CoolGUI.Elements, { Instance = mainFrame, Type = "Frame" })
+
+    -- Title bar
+    local titleBar = Instance.new("Frame")
+    titleBar.Size = UDim2.new(1, 0, 0, 30)
+    titleBar.BackgroundColor3 = CoolGUI.CurrentTheme.Foreground
+    titleBar.BorderSizePixel = 0
+    titleBar.Parent = mainFrame
+
+    -- Track the element
+    table.insert(CoolGUI.Elements, { Instance = titleBar, Type = "Frame" })
+
+    local titleText = Instance.new("TextLabel")
+    titleText.Text = options.Title or "CoolGUI"
+    titleText.Size = UDim2.new(1, 0, 1, 0)
+    titleText.TextColor3 = CoolGUI.CurrentTheme.Text
+    titleText.BackgroundTransparency = 1
+    titleText.Font = Enum.Font.SourceSansBold
+    titleText.TextSize = 18
+    titleText.Parent = titleBar
+
+    -- Track the element
+    table.insert(CoolGUI.Elements, { Instance = titleText, Type = "TextLabel" })
+
+    -- Add button function
+    function window:AddButton(options)
+        local button = Instance.new("TextButton")
+        button.Text = options.Text or "Button"
+        button.Size = UDim2.new(1, -10, 0, 30)
+        button.Position = UDim2.new(0, 5, 0, #mainFrame:GetChildren() * 35)
+        button.BackgroundColor3 = CoolGUI.CurrentTheme.Foreground
+        button.TextColor3 = CoolGUI.CurrentTheme.Text
+        button.Font = Enum.Font.SourceSans
+        button.TextSize = 14
+        button.Parent = mainFrame
+
+        -- Track the element
+        table.insert(CoolGUI.Elements, { Instance = button, Type = "Button" })
+
+        button.MouseButton1Click:Connect(options.Callback or function() end)
+    end
+
+    return window
+end
+
+return CoolGUI
