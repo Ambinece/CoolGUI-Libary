@@ -149,6 +149,33 @@ function CoolGUI:CreateWindow(options)
         button.MouseButton1Click:Connect(options.Callback or function() end)
     end
 
+    -- Add toggle function
+    function window:AddToggle(options)
+        local state = false
+
+        local toggle = Instance.new("TextButton")
+        toggle.Text = (options.Text or "Toggle") .. ": OFF"
+        toggle.Size = UDim2.new(1, -10, 0, 30)
+        toggle.Position = UDim2.new(0, 5, 0, #mainFrame:GetChildren() * 35)
+        toggle.BackgroundColor3 = CoolGUI.CurrentTheme.Foreground
+        toggle.TextColor3 = CoolGUI.CurrentTheme.Text
+        toggle.Font = Enum.Font.SourceSans
+        toggle.TextSize = 14
+        toggle.Parent = mainFrame
+
+        -- Track the element
+        table.insert(CoolGUI.Elements, { Instance = toggle, Type = "Button" })
+
+        toggle.MouseButton1Click:Connect(function()
+            state = not state
+            toggle.Text = (options.Text or "Toggle") .. ": " .. (state and "ON" or "OFF")
+            if options.Callback then
+                options.Callback(state)
+            end
+        end)
+    end
+
+
     return window
 end
 
