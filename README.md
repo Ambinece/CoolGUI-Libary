@@ -1,6 +1,6 @@
 Basic repesentation of a script using this library:
 
-```
+```luau
 local CoolGUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/Ambinece/CoolGUI-Libary/refs/heads/main/CoolGUI"))()
 
 -- Create the main window
