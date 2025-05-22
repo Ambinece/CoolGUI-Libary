@@ -8,7 +8,7 @@ local window = CoolGUI:CreateWindow({
     Title = "C00lGui"
 })
 
--- 
+-- Create a button
 window:AddButton({
     Text = "Button",
     Callback = function()
@@ -16,6 +16,7 @@ window:AddButton({
     end
 })
 
+-- Create a toggle
 window:AddToggle({
     Text = "Toggle",
     Callback = function(state)
