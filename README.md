@@ -1,5 +1,6 @@
 Basic repesentation of a script using this library:
 
+```
 local CoolGUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/Ambinece/CoolGUI-Libary/refs/heads/main/CoolGUI"))()
 
 -- Create the main window
@@ -28,3 +29,4 @@ window:AddToggle({
 
 Change theme later
 CoolGUI:SetTheme("RedAndBlack") -- Only works if the theme exists
+```
