@@ -28,6 +28,6 @@ window:AddToggle({
     end
 })
 
-Change theme later
+-- Change theme
 CoolGUI:SetTheme("RedAndBlack") -- Only works if the theme exists
 ```
