@@ -30,25 +30,25 @@ CoolGUI.Themes = {
     RedAndWhite = {
         Background = Color3.fromRGB(235, 235, 235), -- Light background
         Foreground = Color3.fromRGB(215, 215, 215), -- Slightly darker for elements
-        Text = Color3.fromRGB(255, 255, 255),   -- White text
+        Text = Color3.fromRGB(0, 0, 0),   -- Black text
         Accent = Color3.fromRGB(255, 50, 50),   -- Bright red for accents
     },
     BlueAndWhite = {
         Background = Color3.fromRGB(235, 235, 235), -- Light background
         Foreground = Color3.fromRGB(215, 215, 215), -- Slightly darker for elements
-        Text = Color3.fromRGB(255, 255, 255),   -- White text
+        Text = Color3.fromRGB(0, 0, 0),   -- Black text
         Accent = Color3.fromRGB(50, 50, 255),   -- Blue for accents
     },
     GreenAndWhite = {
         Background = Color3.fromRGB(235, 235, 235), -- Light background
         Foreground = Color3.fromRGB(215, 215, 215), -- Slightly darker for elements
-        Text = Color3.fromRGB(255, 255, 255),   -- White text
+        Text = Color3.fromRGB(0, 0, 0),   -- Black text
         Accent = Color3.fromRGB(50, 255, 50),   -- Green for accents
     },
     YellowAndWhite = {
         Background = Color3.fromRGB(235, 235, 235), -- Light background
         Foreground = Color3.fromRGB(215, 215, 215), -- Slightly darker for elements
-        Text = Color3.fromRGB(255, 255, 255),   -- White text
+        Text = Color3.fromRGB(0, 0, 0),   -- Black text
         Accent = Color3.fromRGB(255, 255, 50),   -- Yellow for accents
     },
 }
